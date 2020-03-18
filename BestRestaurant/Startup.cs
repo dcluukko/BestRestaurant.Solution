@@ -43,7 +43,7 @@ namespace BestRestaurant
 
         app.Run(async (context) =>
         {
-          await context.Response.WriteAsync("Something went wrong!");
+          await context.Response.WriteAsync("Poop!");
         });
 
     }
