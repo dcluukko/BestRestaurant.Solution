@@ -18,56 +18,56 @@ namespace BestRestaurant.Controllers
 
     public ActionResult Index()
     {
-      List<Review> model = _db.Reviews.Include(restaurants => reviews2.Cuisine).ToList();
+      List<Review> model = _db.Reviews.Include(reviews => reviews.Restaurant).ToList();
       return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
+      ViewBag.RestaurantId = new SelectList(_db.Restaurants, "RestaurantId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Restaurant restaurant)
+    public ActionResult Create(Review review)
     {
-      _db.Restaurants.Add(restaurant);
+      _db.Restaurants.Add(review);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      return View(thisRestaurant);
+      Review thisReview = _db.Reviews.FirstOrDefault(reviews => reviews.ReviewId == id);
+      return View(thisReview);
     }
 
     public ActionResult Edit(int id)
     {
-      var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
-      return View(thisRestaurant);
+      var thisReview = _db.Reviews.FirstOrDefault(reviews => reviews.ReviewId == id);
+      ViewBag.ReviewId = new SelectList(_db.Restaurants, "RestaurantId", "Name");
+      return View(thisReview);
     }
 
     [HttpPost]
-    public ActionResult Edit(Restaurant restaurant)
+    public ActionResult Edit(Review review)
     {
-      _db.Entry(restaurant).State = EntityState.Modified;
+      _db.Entry(review).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      return View(thisRestaurant);
+      var thisReview = _db.Reviews.FirstOrDefault(reviews => reviews.ReviewId == id);
+      return View(thisReview);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      _db.Restaurants.Remove(thisRestaurant);
+      var thisReview = _db.Reviews.FirstOrDefault(reviews => reviews.ReviewId == id);
+      _db.Reviews.Remove(thisReview);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
