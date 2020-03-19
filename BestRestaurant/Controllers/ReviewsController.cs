@@ -31,7 +31,7 @@ namespace BestRestaurant.Controllers
     [HttpPost]
     public ActionResult Create(Review review)
     {
-      _db.Restaurants.Add(review);
+      _db.Reviews.Add(review);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
