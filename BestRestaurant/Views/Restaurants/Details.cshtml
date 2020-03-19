@@ -1,15 +1,29 @@
-  
 @{
   Layout = "_Layout";
 }
 
-<!-- @* @using  ToDoList.Models; *@ -->
+<!-- @using BestRestaurant.Models; -->
 @model BestRestaurant.Models.Restaurant;
+
 
 <h2>Restaurant Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
 
+<ul>
+@if (@model.Review.Count == 0)
+{
+  <p>no reviews found</p>
+}
+
+@foreach (Review review in @Model.Reviews)
+{
+  <li>Description: @review.Description</li>
+}
+</ul>
+
 <p>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</p>
+<p>@Html.ActionLink("Delete restaurant", "Delete", new { id = Model.RestaurantId })</p>
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
+

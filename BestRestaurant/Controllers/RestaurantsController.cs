@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace BestRestaurant.Controllers
 {
   public class RestaurantsController : Controller
@@ -30,6 +31,15 @@ namespace BestRestaurant.Controllers
 
       return View(thisRestaurant);
     }
+
+    // public ActionResult Details(int id)
+    // {
+    //   Cuisine thisCuisine = _db.Cuisines.FirstOrDefault(cuisine => cuisine.CuisineId == id);
+
+    //   thisCuisine.Restaurants = _db.Restaurants.Where(restaurant => restaurant.CuisineId == id).ToList();
+
+    //   return View(thisCuisine);
+    // }
 
     public ActionResult Create()
     {
