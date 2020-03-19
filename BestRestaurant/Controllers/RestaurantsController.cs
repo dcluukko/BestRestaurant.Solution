@@ -22,6 +22,15 @@ namespace BestRestaurant.Controllers
       return View(model);
     }
 
+    public ActionResult Details(int id)
+    {
+      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == id);
+
+      thisRestaurant.Reviews = _db.Reviews.Where(review => review.RestaurantId == id).ToList();
+
+      return View(thisRestaurant);
+    }
+
     public ActionResult Create()
     {
       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
